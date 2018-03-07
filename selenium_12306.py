@@ -22,7 +22,7 @@ if __name__=='__main__':
     username.send_keys("username")
     password.send_keys("password")
     while True:
-        current_url = driver.current_url
+        current_url = driver.current_url # driver.current_url代表driver当前页面url
         if current_url != login_url:
             if current_url[:-1] != login_url:  # choose wrong verify_pic
                 print ('登陆成功，跳转中!')
@@ -63,8 +63,8 @@ if __name__=='__main__':
     #ticket = all_ticket.find_element_by_xpath('//tr[1]/td[last()]')
     #count=0
 
-    tickets=['D3094:5l000D309460']
-    bookable=0
+    tickets=['D3094:5l000D309460','G7024:51000d702454']
+    bookable=0 #当车次可用时该值为1跳出循环
     while bookable==0:
         for i in tickets:
             path=i.split(':')[1]
@@ -99,6 +99,8 @@ if __name__=='__main__':
                 #print('车次'+checi+'目前不能预定，尝试第 '+ str(count) +' 次')
                 print('车次' + checi + '目前不能预定，尝试下一车次')
                 #continue
+        print ('所有车次不可订购，刷新继续中..')
+        driver.find_element_by_id('query_ticket').click()
 
     confirm_url='https://kyfw.12306.cn/otn/confirmPassenger/initDc'
 
@@ -107,14 +109,14 @@ if __name__=='__main__':
         if current_url == confirm_url: #准备选座位
             try:
                 passenger0 = WebDriverWait(driver, 10).until(
-                    EC.element_to_be_clickable((By.ID, 'normalPassenger_0'))
+                    EC.element_to_be_clickable((By.ID, 'normalPassenger_0')) #获取第一名乘客
                 )
                 passenger0.click()
                 driver.find_element_by_id('submitOrder_id').click()
 
                 seat = WebDriverWait(driver, 10).until(
                     EC.element_to_be_clickable((By.XPATH, '//*[@id="id-seat-sel"]/div[2]/div[2]/ul[1]/li/a'))
-                )
+                ) #选择靠窗位置
                 seat.click()
 
 
