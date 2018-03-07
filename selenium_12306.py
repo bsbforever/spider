@@ -51,10 +51,7 @@ if __name__=='__main__':
     train_date= driver.find_element_by_xpath('/html/body/div[30]/div[2]/div[2]/div[1]/div')
     train_date.click()
 
-    #点击查询
-    driver.find_element_by_id('query_ticket').click()
 
-    time.sleep(5)
 
     #判断车票是否可订购
 
@@ -63,9 +60,11 @@ if __name__=='__main__':
     #ticket = all_ticket.find_element_by_xpath('//tr[1]/td[last()]')
     #count=0
 
-    tickets=['D3094:5l000D309460','G7024:51000d702454']
+    tickets=['D3094:5l000D3094601','G7024:51000d702454']
     bookable=0 #当车次可用时该值为1跳出循环
     while bookable==0:
+        driver.find_element_by_id('query_ticket').click() #点击查询
+        time.sleep(5)
         for i in tickets:
             path=i.split(':')[1]
             checi=i.split(':')[0]
@@ -100,7 +99,7 @@ if __name__=='__main__':
                 print('车次' + checi + '目前不能预定，尝试下一车次')
                 #continue
         print ('所有车次不可订购，刷新继续中..')
-        driver.find_element_by_id('query_ticket').click()
+
 
     confirm_url='https://kyfw.12306.cn/otn/confirmPassenger/initDc'
 
