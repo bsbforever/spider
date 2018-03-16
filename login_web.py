@@ -23,8 +23,8 @@ def login_51cto():
     }
     data={
         '_csrf':token,
-        'LoginForm[username]':'username',
-   'LoginForm[password]': 'password',
+        'LoginForm[username]':'bsbforever',
+   'LoginForm[password]': '296701298a',
     'LoginForm[rememberMe]': '0',
     'login-button': '登 录'
     }
@@ -36,7 +36,7 @@ def login_51cto():
 
     # 利用保持的Session打开主页获取登录信息
     result=s.get('http://home.51cto.com/home').text
-    if 'username' in result:
+    if 'bsbforever' in result:
         print ('恭喜,登陆51cto成功,领取下载豆中..')
 
 
@@ -44,10 +44,13 @@ def login_51cto():
     download=s.post('http://down.51cto.com/download.php?do=getfreecredits&t=0.8367867217711695').text
 
 
-    if '2' in download:
+    if '2' in download.split(',')[1]:
         print ('领取成功,当前下载豆:'+ download.split(',')[0])
-    elif '1' in download:
+    elif '1' in download.split(',')[0]:
+        print (download)
         print ('抱歉,今天已经领取,请明天再来,当前下载豆:'+download.split(',')[1])
+    else:
+        print ('请注意,领取失败')
     #print (download)
 
 
@@ -72,8 +75,8 @@ def login_wodehd():
         'reurl':'https://www.wodehd.com/',
    'popup': 'false',
     'iframe': '',
-    'username': 'username',
-    'password': 'password'
+    'username': 'bsbforever',
+    'password': '296701298a'
     }
 
     #模拟POST 51cto 登陆
@@ -84,7 +87,7 @@ def login_wodehd():
     # 利用保持的Session打开主页获取登录信息
     result=s.get('https://www.wodehd.com/').text
     #print (result)
-    if 'username' in result:
+    if 'bsbforever' in result:
         print ('登陆成功')
 
     #movie=s.get('https://www.wodehd.com/imdb-19893.html').content
@@ -101,5 +104,5 @@ def login_wodehd():
     print(movie_link)
     print(movie_title)
 if __name__=="__main__":
-    #login_51cto()
-    login_wodehd()
+    login_51cto()
+    #login_wodehd()
