@@ -10,4 +10,6 @@ login_web.py     使用requests模拟登陆51cto并领取下载豆
 
 selenium_12306.py   使用selenium 模拟操作12306事先自动订票
 
+login_web.py        使用requests模拟登陆51cto
+
 [点击扫一扫关注我的微信公众号：宅必备](http://www.zhaibibei.cn/static/zhaibibei.png)
